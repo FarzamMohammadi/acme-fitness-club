@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeClubBackend", "AcmeClubBackend\AcmeClubBackend.csproj", "{442B9585-CB8B-4F76-820E-04D587A36A85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{442B9585-CB8B-4F76-820E-04D587A36A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442B9585-CB8B-4F76-820E-04D587A36A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442B9585-CB8B-4F76-820E-04D587A36A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442B9585-CB8B-4F76-820E-04D587A36A85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B735CD6-ABDE-40A6-8159-504E9903B7DA}
+	EndGlobalSection
+EndGlobal
