@@ -29,7 +29,7 @@ namespace AcmeClubBackend.Controllers
             return await _context.Registrations.ToListAsync();
         }
 
-        // GET: api/Registrations/5
+        // GET: api/Registrations/:id
         [HttpGet("{id}")]
         public async Task<ActionResult<Registration>> GetRegistration(int id)
         {
@@ -41,6 +41,20 @@ namespace AcmeClubBackend.Controllers
             }
 
             return registration;
+        }
+
+        // GET: api/Registrations/:activity
+        [HttpGet("/activity/{activity}")]
+        public async Task<ActionResult<List<Registration>>> GetRegistrationsForAcitivty(string activity)
+        {
+            List<Registration> registrations = await _context.Registrations.Where(x => x.Activity.ToLower() == activity.ToLower()).ToListAsync();
+
+            if (registrations == null)
+            {
+                return NotFound();
+            }
+
+            return registrations;
         }
 
         // PUT: api/Registrations/5
