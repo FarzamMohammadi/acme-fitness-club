@@ -9,15 +9,16 @@ import { Registration } from '../../Registration';
 })
 export class RegistrationComponent implements OnInit {
   registrations: Registration[] = [];
-
+  displayedColumns: string[] = [
+    'demo-id',
+    'demo-firstName',
+    'demo-activity',
+    'demo-startDate',
+  ];
   constructor(private registrationService: RegistrationService) {
-    // this.registrationService
-    //   .getRegistrations()
-    //   .subscribe((registrations) => (this.registrations = registrations));
-    // this.registrationService
-    //   .getRegistrations()
-    //   .subscribe((registration) => console.log(registration));
-    this.registrationService.getRegistrations();
+    this.registrationService
+      .getRegistrations()
+      .subscribe((registrations) => (this.registrations = registrations));
   }
 
   ngOnInit(): void {}
