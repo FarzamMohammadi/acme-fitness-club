@@ -1,6 +1,6 @@
 <form #signUpForm="ngForm" *ngIf="showSignUpForm" class="add-form" (ngSubmit)="onSubmit(signUpForm)">
     <div class="form-control">
-        <label for="text">First Name:</label>
+        <label for="text">First Name:*</label>
         <input type="text" name="firstName" [(ngModel)]="firstName" id="firstName" placeholder="John">
     </div>
     <div class="form-control">
@@ -16,11 +16,16 @@
         <input type="date" name="startDate" [(ngModel)]="startDate"  id="startDate">
     </div>
     <div class="form-control">
-        <label for="text">Your Total Years Exprience:</label>
+        <label for="text">Total Years Exprience With This Activity:</label>
         <input type="number" name="yearsOfExperience" [(ngModel)]="yearsOfExperience"  id="yearsOfExperience" placeholder="2">
     </div>
     <div class="form-control">
-        <label for="text">Activity:*</label>
+        <div class="hover-field">
+            <label for="text">Activity:*</label>
+            <span class="hovertext" data-hover="Aerobics, Stationary Cycling, Dancing, Martial Arts, Swimming, Weightlifting, Yoga">
+                Offered Activities
+            </span>
+        </div>
         <input type="text" name="activity" [(ngModel)]="activity"  id="activity" placeholder="Stationary bicycling">
     </div>
     <div class="form-control">

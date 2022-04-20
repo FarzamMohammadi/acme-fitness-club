@@ -17,6 +17,15 @@ export class RegistrationFormComponent implements OnInit {
   yearsOfExperience: string;
   activity: string;
   comments: string;
+  availableActivities: string[] = [
+    'Aerobics',
+    'Stationary Cycling',
+    'Dancing',
+    'Martial Arts',
+    'Swimming',
+    'Weightlifting',
+    'Yoga',
+  ];
   showSignUpForm: boolean;
   subscription: Subscription;
 
@@ -31,21 +40,39 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(signUpForm: NgForm) {
-    if (!this.email || !this.startDate || !this.activity) {
-      alert('Please fill out the required fields!');
+    if (!this.email || !this.startDate || !this.activity || !this.firstName) {
+      alert('Please fill out the required fields');
+    } else if (
+      !this.availableActivities.includes(
+        this.capitalizeFirstLetter(this.activity)
+      )
+    ) {
+      alert('Please select one of the offered activities');
+    } else {
+      const newRegistration = {
+        firstName: this.firstName || '',
+        lastName: this.lastName || '',
+        email: this.email,
+        startDate: this.startDate,
+        yearsOfExperience: this.yearsOfExperience
+          ? this.yearsOfExperience.toString()
+          : '',
+        activity: this.capitalizeFirstLetter(this.activity),
+        comments: this.comments || '',
+      };
+
+      this.onSignUpFormSubmit.emit(newRegistration);
+      signUpForm.reset();
     }
+  }
 
-    const newRegistration = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      startDate: this.startDate,
-      yearsOfExperience: this.yearsOfExperience.toString(),
-      activity: this.activity,
-      comments: this.comments,
-    };
+  capitalizeFirstLetter(activity: string) {
+    const words = activity.toLowerCase().split(' ');
 
-    this.onSignUpFormSubmit.emit(newRegistration);
-    signUpForm.reset();
+    for (let i = 0; i < words.length; i++) {
+      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    }
+    let filteredActivity = words.join(' ');
+    return filteredActivity;
   }
 }
