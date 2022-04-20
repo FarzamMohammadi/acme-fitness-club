@@ -3,6 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Registration } from '../Registration';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,5 +18,9 @@ export class RegistrationService {
 
   getRegistrations(): Observable<Registration[]> {
     return this.http.get<Registration[]>(this.apiUrl);
+  }
+
+  addNewRegistration(registration: Registration): Observable<Registration> {
+    return this.http.post<Registration>(this.apiUrl, registration, httpOptions);
   }
 }

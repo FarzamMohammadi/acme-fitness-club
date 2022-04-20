@@ -1,0 +1,33 @@
+<form #signUpForm="ngForm" *ngIf="showSignUpForm" class="add-form" (ngSubmit)="onSubmit(signUpForm)">
+    <div class="form-control">
+        <label for="text">First Name:</label>
+        <input type="text" name="firstName" [(ngModel)]="firstName" id="firstName" placeholder="John">
+    </div>
+    <div class="form-control">
+        <label for="text">Last Name:</label>
+        <input type="text" name="lastName" [(ngModel)]="lastName"  id="lastName" placeholder="Jackson">
+    </div>
+    <div class="form-control">
+        <label for="text">Email:*</label>
+        <input type="text" name="email" [(ngModel)]="email"  id="email" placeholder="j.jackson@gmail.com">
+    </div>
+    <div class="form-control">
+        <label for="text">Start Date:*</label>
+        <input type="date" name="startDate" [(ngModel)]="startDate"  id="startDate">
+    </div>
+    <div class="form-control">
+        <label for="text">Your Total Years Exprience:</label>
+        <input type="number" name="yearsOfExperience" [(ngModel)]="yearsOfExperience"  id="yearsOfExperience" placeholder="2">
+    </div>
+    <div class="form-control">
+        <label for="text">Activity:*</label>
+        <input type="text" name="activity" [(ngModel)]="activity"  id="activity" placeholder="Stationary bicycling">
+    </div>
+    <div class="form-control">
+        <label for="text">Comments:</label>
+        <textarea type="textarea" name="comments" [(ngModel)]="comments"  id="comments"></textarea>
+    </div>
+    <input type="submit" value="Register" class="btn btn-block">
+</form>
+
+<!-- *ngIf="showSignUpForm" -->

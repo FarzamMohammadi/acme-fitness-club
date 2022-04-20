@@ -9,12 +9,7 @@ import { Registration } from '../../Registration';
 })
 export class RegistrationComponent implements OnInit {
   registrations: Registration[] = [];
-  displayedColumns: string[] = [
-    'demo-id',
-    'demo-firstName',
-    'demo-activity',
-    'demo-startDate',
-  ];
+
   constructor(private registrationService: RegistrationService) {
     this.registrationService
       .getRegistrations()
@@ -22,4 +17,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  addNewRegistration(newRegistation: Registration) {
+    this.registrationService
+      .addNewRegistration(newRegistation)
+      .subscribe(
+        (registration) =>
+          (this.registrations = this.registrations.concat(registration))
+      );
+  }
 }

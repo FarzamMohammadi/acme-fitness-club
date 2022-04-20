@@ -2,7 +2,7 @@ export interface Registration {
   id?: number;
   firstName: string;
   lastName: string;
-  emailName: string;
+  email: string;
   startDate: Date;
   yearsOfExperience: string;
   activity: string;
