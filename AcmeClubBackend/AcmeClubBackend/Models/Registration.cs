@@ -1,15 +1,22 @@
-﻿namespace AcmeClubBackend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AcmeClubBackend.Models
 {
     public class Registration
     {
         public int Id {  get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public DateTime StartDate { get; set; } 
-        public string YearsOfExperience { get; set; } = string.Empty;
-        public string Activity { get; set; } = string.Empty;
-        public string Comments { get; set; } = string.Empty;
+        [Required]
+        public string? FirstName { get; set; }
+        
+        public string? LastName { get; set; }
+        [Required]
+        public string? Email { get; set; }
+        [Required]
+        public DateTime? StartDate { get; set; } 
+        public string? YearsOfExperience { get; set; }
+        [Required]
+        public string? Activity { get; set; } 
+        public string? Comments { get; set; }
 
     }
 }
