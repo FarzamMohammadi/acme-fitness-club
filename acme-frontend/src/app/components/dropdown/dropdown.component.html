@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-select ngModel (ngModelChange)="filterByActivity($event)"placeholder="Activity" >
+    <ng-container *ngFor="let activity of filteredActivities">
+      <mat-option [value]="activity">{{activity}}</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>

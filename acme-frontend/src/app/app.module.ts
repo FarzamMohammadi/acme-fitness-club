@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -11,6 +12,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationTableComponent } from './components/registration-table/registration-table.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     RegistrationComponent,
     RegistrationTableComponent,
     RegistrationFormComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     BrowserAnimationsModule,
     MatTableModule,
     FormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
