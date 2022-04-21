@@ -1,7 +1,7 @@
-<form #signUpForm="ngForm" *ngIf="showSignUpForm" class="add-form" (ngSubmit)="onSubmit(signUpForm)">
+<form #signUpForm="ngForm" *ngIf="showSignUpForm" class="add-form" (ngSubmit)="onSubmit(signUpForm)" >
     <div class="form-control">
         <label for="text">First Name:*</label>
-        <input type="text" name="firstName" [(ngModel)]="firstName" id="firstName" placeholder="John">
+        <input type="text" name="firstName" [(ngModel)]="firstName" id="firstName" placeholder="John" >
     </div>
     <div class="form-control">
         <label for="text">Last Name:</label>
@@ -32,5 +32,5 @@
         <label for="text">Comments:</label>
         <textarea type="textarea" name="comments" [(ngModel)]="comments"  id="comments"></textarea>
     </div>
-    <input type="submit" value="Register" class="btn btn-block">
+    <input type="submit" class="btn btn-block">
 </form>

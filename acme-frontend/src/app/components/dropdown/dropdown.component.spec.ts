@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { DropdownComponent } from './dropdown.component';
 
@@ -8,9 +13,9 @@ describe('DropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DropdownComponent ]
-    })
-    .compileComponents();
+      declarations: [DropdownComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

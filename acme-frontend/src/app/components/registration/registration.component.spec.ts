@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { RegistrationComponent } from './registration.component';
 
@@ -8,9 +13,9 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistrationComponent ]
-    })
-    .compileComponents();
+      declarations: [RegistrationComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
