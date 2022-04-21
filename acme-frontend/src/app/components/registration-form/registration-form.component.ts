@@ -40,6 +40,7 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(signUpForm: NgForm) {
+    // Validation before form submission
     if (!this.email || !this.startDate || !this.activity || !this.firstName) {
       alert('Please fill out the required fields');
     } else if (
@@ -60,8 +61,12 @@ export class RegistrationFormComponent implements OnInit {
         activity: this.capitalizeFirstLetter(this.activity),
         comments: this.comments || '',
       };
-
+      // New registration object is emitted to be added to database
       this.onSignUpFormSubmit.emit(newRegistration);
+      // Sends activity of new databse record to be added to dropdown component for filtering
+      this.uiService.addNewDropDownActivity(
+        this.capitalizeFirstLetter(this.activity)
+      );
       signUpForm.reset();
     }
   }

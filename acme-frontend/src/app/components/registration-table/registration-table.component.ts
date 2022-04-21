@@ -20,6 +20,7 @@ export class RegistrationTableComponent implements OnInit {
   }
 
   constructor(private uiService: UiService) {
+    // Filters the table records based on dropdown activity change
     this.subscription = this.uiService
       .onActivityChange()
       .subscribe((activity) =>

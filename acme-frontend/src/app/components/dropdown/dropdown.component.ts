@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Registration } from '../../Registration';
 import { RegistrationService } from '../../services/registration.service';
 import { UiService } from '../../services/ui.service';
@@ -17,6 +17,7 @@ export class DropdownComponent implements OnInit {
     private registrationService: RegistrationService,
     private uiService: UiService
   ) {
+    // Gets registrations and adds their activites to dropdown while preventing duplicate values
     this.registrationService
       .getRegistrations()
       .subscribe((registrations) =>
@@ -26,10 +27,19 @@ export class DropdownComponent implements OnInit {
             : ''
         )
       );
+    // If new non-existing activity is added via the registration-from, it gets added to the current dropdown value while preventing duplicate values
+    this.subscription = this.uiService
+      .onDropDownActivityChange()
+      .subscribe((newActivity) =>
+        !this.filteredActivities.includes(newActivity)
+          ? this.filteredActivities.push(newActivity)
+          : ''
+      );
   }
 
   ngOnInit(): void {}
 
+  // Engages the ui service to filter the registration-table component by selected activity
   filterByActivity(activity: string) {
     this.uiService.fitlerFormByActivity(activity);
   }

@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private uiService: UiService) {
+    // Used to show/hide registration-form component in UI toggled via the button
     this.subscription = this.uiService
       .onToggle()
       .subscribe((toggleValue) => (this.showSignUp = toggleValue));
