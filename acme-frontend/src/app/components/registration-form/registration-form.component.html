@@ -1,36 +1,44 @@
-<form #signUpForm="ngForm" *ngIf="showSignUpForm" class="add-form" (ngSubmit)="onSubmit(signUpForm)" >
+<form [formGroup]="signUpForm" *ngIf="showSignUpForm" class="add-form">
     <div class="form-control">
         <label for="text">First Name:*</label>
-        <input type="text" name="firstName" [(ngModel)]="firstName" id="firstName" placeholder="John" >
+        <input type="text" formControlName="firstName" placeholder="Bon" class="form-control">
+        <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">First Name is Required</small> 
     </div>
     <div class="form-control">
         <label for="text">Last Name:</label>
-        <input type="text" name="lastName" [(ngModel)]="lastName"  id="lastName" placeholder="Jackson">
+        <input type="text"formControlName="lastName" placeholder="Scott">
     </div>
     <div class="form-control">
         <label for="text">Email:*</label>
-        <input type="text" name="email" [(ngModel)]="email"  id="email" placeholder="j.jackson@gmail.com">
+        <input type="text" formControlName="email" placeholder="b.scott@gmail.com" class="form-control">
+        <small *ngIf="email?.invalid && email?.touched" class="text-danger">Email is Required</small>
     </div>
     <div class="form-control">
         <label for="text">Start Date:*</label>
-        <input type="date" name="startDate" [(ngModel)]="startDate"  id="startDate">
+        <input type="date" formControlName="startDate" class="form-control">
+        <small *ngIf="startDate?.invalid && startDate?.touched" class="text-danger">Start Date is Required</small>
     </div>
     <div class="form-control">
-        <label for="text">Total Years Exprience With This Activity:</label>
-        <input type="number" name="yearsOfExperience" [(ngModel)]="yearsOfExperience"  id="yearsOfExperience" placeholder="2">
-    </div>
+        <label for="text">Total Years of Exprience With This Activity:</label>
+        <input type="number" formControlName="yearsOfExperience" placeholder="2">
+    </div>  
     <div class="form-control">
         <div class="hover-field">
             <label for="text">Activity:*</label>
-            <span class="hovertext" data-hover="Aerobics, Stationary Cycling, Dancing, Martial Arts, Swimming, Weightlifting, Yoga">
-                Offered Activities
+            <span class="hovertext" data-hover="To to request for a new activity to be added, please contact us via email.">
+                Haven't found your favorite activity?
             </span>
         </div>
-        <input type="text" name="activity" [(ngModel)]="activity"  id="activity" placeholder="Stationary bicycling">
+        <mat-select formControlName="activity" placeholder="Swimming" class="form-control activity-select">
+            <ng-container *ngFor="let activity of availableActivities">
+            <mat-option [value]="activity">{{activity}}</mat-option>
+            </ng-container>
+        </mat-select>
+        <small *ngIf="activity?.invalid && activity?.touched" class="text-danger">Activity is Required</small>
     </div>
     <div class="form-control">
         <label for="text">Comments:</label>
-        <textarea type="textarea" name="comments" [(ngModel)]="comments"  id="comments"></textarea>
+        <textarea type="textarea" formControlName="comments"></textarea>
     </div>
-    <input type="submit" class="btn btn-block">
+    <input type="submit" (click)="onSubmit()" [disabled]="signUpForm.invalid" class="btn btn-block">
 </form>
