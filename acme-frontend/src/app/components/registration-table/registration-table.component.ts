@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Registration } from '../../Registration';
 import { UiService } from '../../services/ui.service';
-import { Subscription } from 'rxjs';
+import { RegistrationService } from '../../services/registration.service';
+import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-table',
@@ -11,26 +13,11 @@ import { Subscription } from 'rxjs';
 export class RegistrationTableComponent implements OnInit {
   unfilteredRegistrations: Registration[] = [];
   displayedColumns: string[] = ['id', 'firstName', 'activity', 'startDate'];
-  subscription: Subscription;
-  registrationsToShow: Registration[] = [];
 
-  @Input() set registrations(registrations: Registration[]) {
-    this.unfilteredRegistrations = registrations;
-    this.registrationsToShow = registrations;
-  }
+  @Input() registrations: Registration[] | null;
+  @Input() combinedRegistrations: any;
 
-  constructor(private uiService: UiService) {
-    // Filters the table records based on dropdown activity change
-    this.subscription = this.uiService
-      .onActivityChange()
-      .subscribe((activity) =>
-        activity == 'All'
-          ? (this.registrationsToShow = this.unfilteredRegistrations)
-          : (this.registrationsToShow = this.unfilteredRegistrations.filter(
-              (registration) => registration.activity.includes(activity)
-            ))
-      );
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Registration } from '../Registration';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,7 +21,20 @@ export class RegistrationService {
     return this.http.get<Registration[]>(this.apiUrl);
   }
 
-  addNewRegistration(registration: Registration): Observable<Registration> {
-    return this.http.post<Registration>(this.apiUrl, registration, httpOptions);
+  getRegistrationsViaActivity(activity: string): Observable<Registration[]> {
+    return this.http.get<Registration[]>(this.apiUrl + '/activity/' + activity);
+  }
+
+  async addNewRegistration(
+    registration: Registration
+  ): Promise<Registration | undefined> {
+    try {
+      return await this.http
+        .post<Registration>(this.apiUrl, registration, httpOptions)
+        .toPromise();
+    } catch (error) {
+      console.log(error);
+      return undefined;
+    }
   }
 }
