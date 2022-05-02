@@ -11,15 +11,38 @@ import { map, tap, take } from 'rxjs/operators';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  // Setting up observable values to be passed and used in registration-table template async pipe
   subscription: Subscription;
+
+  // Setting up observable values to be passed and used in registration-table template async pipe
   registrationsSubject$ = new BehaviorSubject<Registration[]>([]);
   registrations$ = this.registrationsSubject$.asObservable();
+
   triggerSubject$ = new BehaviorSubject(null);
   trigger$ = this.triggerSubject$.asObservable();
+
+  // Clears and then sets registrations observable to all registrations in DB to get latest records
+  getRegistrations = () => {
+    this.registrationsSubject$ = new BehaviorSubject<Registration[]>([]);
+    this.registrations$ = this.registrationsSubject$.asObservable();
+    this.triggerSubject$.next(null);
+  };
   allRegistrations$ = this.registrationService.getRegistrations();
+  combinedRegistrations$ = combineLatest([
+    this.allRegistrations$,
+    this.trigger$,
+  ]).pipe(
+    tap(([allRegistrations]) =>
+      this.registrationsSubject$.next([
+        ...this.registrationsSubject$.value,
+        ...allRegistrations,
+      ])
+    )
+  );
+
+  // Returns observable object of all registrations filtered via passed activity
   registrationsFilteredViaActivity$ = (activity: string) =>
     this.registrationService.getRegistrationsViaActivity(activity);
+
   constructor(
     private uiService: UiService,
     private registrationService: RegistrationService
@@ -29,24 +52,25 @@ export class RegistrationComponent implements OnInit {
       .onActivityChange()
       .subscribe((activity) =>
         activity == 'All'
-          ? (this.registrations$ = this.allRegistrations$)
+          ? this.getRegistrations()
           : (this.registrations$ =
               this.registrationsFilteredViaActivity$(activity))
       );
   }
 
   ngOnInit(): void {
-    this.registrations$ = this.allRegistrations$;
+    this.getRegistrations();
   }
 
   addNewRegistration(newRegistation: Registration) {
-    const callResult = this.registrationService
+    // Makes call to backend to add new registration then appends it to registrationsSubject observable
+    this.registrationService
       .addNewRegistration(newRegistation)
-      .then((returnedResult) =>
-        returnedResult
+      .then((value) =>
+        value
           ? this.registrationsSubject$.next([
               ...this.registrationsSubject$.value,
-              returnedResult,
+              value,
             ])
           : ''
       );

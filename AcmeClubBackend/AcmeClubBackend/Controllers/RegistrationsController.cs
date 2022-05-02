@@ -48,8 +48,7 @@ namespace AcmeClubBackend.Controllers
         public async Task<ActionResult<List<Registration>>> GetRegistrationsForAcitivty(string activity)
         {
             List<Registration> registrations = await _context.Registrations.Where(x => x.Activity.ToLower() == activity.ToLower()).ToListAsync();
-            Console.WriteLine(registrations);
-            Console.WriteLine(activity);
+
             if (registrations == null)
             {
                 return NotFound();

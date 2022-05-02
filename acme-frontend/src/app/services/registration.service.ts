@@ -25,16 +25,11 @@ export class RegistrationService {
     return this.http.get<Registration[]>(this.apiUrl + '/activity/' + activity);
   }
 
-  async addNewRegistration(
+  addNewRegistration(
     registration: Registration
   ): Promise<Registration | undefined> {
-    try {
-      return await this.http
-        .post<Registration>(this.apiUrl, registration, httpOptions)
-        .toPromise();
-    } catch (error) {
-      console.log(error);
-      return undefined;
-    }
+    return this.http
+      .post<Registration>(this.apiUrl, registration, httpOptions)
+      .toPromise();
   }
 }

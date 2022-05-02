@@ -1,2 +1,2 @@
 <app-registration-form (onSignUpFormSubmit)="addNewRegistration($event)"></app-registration-form>
-<app-registration-table [registrations]="(registrations$ | async)" ></app-registration-table>
+<app-registration-table [registrations]="(registrations$ | async)" [combinedRegistrations]="(combinedRegistrations$ | async)"></app-registration-table>
