@@ -3,6 +3,7 @@ import { Registration } from '../../Registration';
 import { RegistrationService } from '../../services/registration.service';
 import { UiService } from '../../services/ui.service';
 import { Subscription } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dropdown',
@@ -13,21 +14,24 @@ export class DropdownComponent implements OnInit {
   filteredActivities: string[] = ['All'];
   subscription: Subscription;
 
+  // Gets registrations and adds their activites to dropdown while preventing duplicate values
+  activities$ = this.registrationService
+    .getRegistrations()
+    .pipe(
+      tap((registrations: Registration[]) =>
+        registrations.map((registration: Registration) =>
+          !this.filteredActivities.includes(registration.activity)
+            ? this.filteredActivities.push(registration.activity.toString())
+            : ''
+        )
+      )
+    );
+
   constructor(
     private registrationService: RegistrationService,
     private uiService: UiService
   ) {
-    // Gets registrations and adds their activites to dropdown while preventing duplicate values
-    this.registrationService
-      .getRegistrations()
-      .subscribe((registrations) =>
-        registrations.map((registration) =>
-          !this.filteredActivities.includes(registration.activity)
-            ? this.filteredActivities.push(registration.activity)
-            : ''
-        )
-      );
-    // If new non-existing activity is added via the registration-from, it gets added to the current dropdown value while preventing duplicate values
+    // If new non-existing activity is added via the registration-from, it gets added to the current dropdown array while preventing duplicate values
     this.subscription = this.uiService
       .onDropDownActivityChange()
       .subscribe((newActivity) =>

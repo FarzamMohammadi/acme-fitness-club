@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field *ngIf="(activities$ | async)">
   <mat-select ngModel (ngModelChange)="filterByActivity($event)"placeholder="Activity" >
     <ng-container *ngFor="let activity of filteredActivities">
       <mat-option [value]="activity">{{activity}}</mat-option>
